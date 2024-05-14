@@ -1,0 +1,83 @@
+{/*             <Accordion defaultActiveKey="0" key='0'>
+                {posts.map((item) => {
+                    // const itemHeader = item
+                    return (
+                    <Accordion.Item key={item.id} eventKey={item.id}>
+
+                        <Accordion.Header>{item.content.split("\n")[0]}</Accordion.Header>
+                        <Accordion.Body>{item.content}</Accordion.Body>
+                    </Accordion.Item>)
+                })}
+            </Accordion> */}
+
+
+ /*  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Call your login API here
+    try {
+      const response = await fetch('http://localhost:3001/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Handle successful login
+        localStorage.setItem('token', data.token);
+        history('/'); // Redirect to dashboard or home page
+      } else {
+        // Handle login error
+        console.error(data.message);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }; */
+
+  /*     @Put('images/:id')
+    @UseGuards(JwtAuthGuard)
+    updateImage(
+        @Param('id', ParseIntPipe)id: number,
+        @Body()imageUpdateDto: UpdateImageDto
+    ): Promise<UpdateResult>
+    {
+        return this.imageService.updateImg(id, imageUpdateDto);
+    } */
+    
+                /* return posts.map((post) => {
+                if (post.id == option) return post;
+            }) */
+
+{/*       {imageUrls.map((url, index) => (
+        <div key={index}>
+          <input
+            type="text"
+            value={url}
+            onChange={(e) => handleInputChange(index, e)}
+            placeholder="Image URL"
+          />
+        </div>
+      ))}
+      <button onClick={addInput}>Add Image URL</button> */}
+      {/* You can add a submit button or handle the data in any other way */}
+                         {/* <label>Images Url {numberOfImages}</label> */}
+                    {/* <input 
+                        type="text"
+                        name="url"
+                        value={}
+                    /> */}
+                    {/* <button onClick={handleIncreaseNumberOfImages}>Add Image</button> */}
+{/*             {posts && posts.map((post) => {
+                return (
+                <div key={post.id}>
+                    <h1 key={post.id}>{post.content.split('\n')[0]}</h1>
+                    <p>{post.content}</p>
+                    <time>{post.createdDate}</time>
+                    <p>{post.images}</p>
+
+                </div>)
+            })} */}
