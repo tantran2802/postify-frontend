@@ -7,13 +7,20 @@ import {
   createBrowserRouter,
   RouterProvider
 } from "react-router-dom";
+import { useEffect } from 'react'
 import HomePage from './layout/homepage';
 import SearchingPost from './all-posts/posts-search';
 import Signup from './login/signup';
+import Post from './all-posts/post';
+import Image from './all-posts/image';
+import NotFoundPage from './utilities/not-found-page';
+import UnauthorizedPage from './utilities/unauthorized-page';
+import { AuthProvider } from './utilities/authContext';
 const elements = [
   {
   path: "/",
   element: <HomePage />,
+  // loader: checkExpiredToken,
   children: [
     {
       path: "posts",
@@ -34,6 +41,22 @@ const elements = [
     {
       path: 'signup',
       element: <Signup/>
+    },
+    {
+      path: 'posts/:postId',
+      element: <Post/>
+    },
+    {
+      path: 'posts/:postId/images/:imageId',
+      element: <Image/>
+    },
+    {
+      path: 'not-found',
+      element: <NotFoundPage/>
+    },
+    {
+      path: 'unauthorized',
+      element: <UnauthorizedPage/>
     }
   ]
   }
@@ -41,7 +64,9 @@ const elements = [
 const router = createBrowserRouter(elements);
 function App() {
   return (
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   );
 }
 export default App;

@@ -24,8 +24,13 @@ const Login = () => {
             body: JSON.stringify(formData)
         }).then(async (data) => {
             const tokenObtained = await data.json();
-            localStorage.setItem('token', tokenObtained.accessToken);
-            navigateTo('/posts');
+            if(tokenObtained.statusCode === 401) navigateTo('/unauthorized')
+            else if (tokenObtained.statusCode === 400) navigateTo('/not-found')
+            else{
+              localStorage.setItem('token', tokenObtained.accessToken);
+              navigateTo('/posts');
+              window.location.reload();
+            }
         }).catch(e => console.log(e))
         }
 

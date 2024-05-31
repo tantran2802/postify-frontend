@@ -24,7 +24,7 @@ export default function Signup(){
             }).then(async (data) => {
                 const tokenObtained = await data.json();
                 console.log(tokenObtained);
-                navigateTo('/posts')
+                navigateTo('/login')
             }).catch(e => console.log(e))
             }
     

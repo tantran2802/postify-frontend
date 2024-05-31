@@ -35,9 +35,12 @@ export default function Posting()
                 "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(posting)
-        }).then((data) => {
-            navigateTo('/posts')
-            console.log(data)
+        }).then(async (data) => {
+          const returnedData = await data.json();
+          if(returnedData.statusCode === 401) navigateTo('/unauthorized')
+          else{
+            navigateTo('/posts');
+          }
         })
         .catch((e) => console.log(e))
     }
@@ -71,7 +74,6 @@ export default function Posting()
                 </div>
               ))}
       <button className="bg-info" type="button" onClick={addImageInput}>Add Image URL</button>
-
             </div>
           </div>
                 <button type="submit">Submit</button>

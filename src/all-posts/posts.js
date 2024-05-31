@@ -1,8 +1,10 @@
 import { Fragment, useEffect} from 'react';
 import { useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
+import { Link } from 'react-router-dom'
 export default function Posts() {
     const [posts, setPosts] = useState([]);
+    const [token, setToken] = useState(null);
     function fetchPosts(){
         fetch('http://localhost:3001/posts/all',
           {
@@ -10,6 +12,7 @@ export default function Posts() {
           }).then(async (data) => {
             const dataObtained = await data.json();
             setPosts(dataObtained);
+            setToken(localStorage.getItem('token'));
           }).catch (e => console.log(e))
       };
       useEffect(() => {
@@ -23,7 +26,11 @@ export default function Posts() {
             </Spinner>) : 
           (posts.map((item) => {
             return (<div className='container-fluid p-5' key={item.id}>
+              {token != null || token != undefined ? 
+              <Link className='text-primary text-center' to={`/posts/${item.id}`} key={item.id}>{item.content.split('\n')[0]}</Link>
+              :
               <h1 className='text-primary text-center' key={item.id}>{item.content.split('\n')[0]}</h1>
+              }
               <p className='text-center'>{item.content}</p>
               <time>{item.createdDate}</time>
               {item.images && (

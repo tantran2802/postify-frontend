@@ -1,8 +1,10 @@
 import { Fragment} from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 export default function SearchingPost(){
     const [searchPost, setSearchingPost] = useState('');
     const [searchPostReturn, setSearchingPostReturn] = useState([]);
+    const navigateTo = useNavigate();
     function handleChangeSearchingPost(e){
         // const { name, value } = e.target;
         const updateSearchingPost = e.target.value;
@@ -15,8 +17,12 @@ export default function SearchingPost(){
             method: 'GET'
           }).then(async (data) => {
             const dataObtained = await data.json();
-            if (dataObtained.statusCode !== 400) setSearchingPostReturn([...dataObtained]);
-          }).catch (e => console.log(e))
+            if(dataObtained.statusCode === 400) {
+              navigateTo('/not-found');
+            }
+            else if (dataObtained.statusCode !== 400) setSearchingPostReturn([...dataObtained]);
+          })
+          .catch (e => console.log(e))
       };
       return(
         <Fragment>
@@ -32,8 +38,6 @@ export default function SearchingPost(){
             </div>
             <div>
               {searchPostReturn &&
-              // searchPostReturn.length === 0 ? (<p>Not Found!</p>) :
-                // (
                 searchPostReturn.map((post, index) => {
                   return (<div key={index}>
                             <h1 key={post.id}>{post.content.split('\n')[0]}</h1>
@@ -42,8 +46,8 @@ export default function SearchingPost(){
                             <div>
                               {post.images && (
                                 <div>
-                                  {post.images.map((image) => {
-                                    return (<img width='300px' height='600' src={image.urlAddress} alt='images'/>)
+                                  {post.images.map((image, index) => {
+                                    return (<img key={index} width='300px' height='600' src={image.urlAddress} alt='images'/>)
                                   })
                                   }
                                 </div>
